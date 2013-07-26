@@ -8,7 +8,7 @@
  * @copyright  (c) 2012-2013 Modular Gaming Team
  * @license    BSD http://modulargaming.com/license
  */
-class MG_Task_Pet extends Minion_Task
+class MG_Task_Pet_Decrease extends Minion_Task
 {
     protected $_options = array(
         'limit' => 4,
