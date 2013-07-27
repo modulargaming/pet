@@ -19,7 +19,7 @@ class MG_Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 			{
 				if ($this->request->post('adopt'))
 				{
-					if(Valid_Pet::limit($this->user->id))
+					if (Valid_Pet::limit($this->user->id))
 					{
 						$pet = ORM::factory('User_Pet')
 						->where('user_pet.id', '=', $this->request->post('adopt'))
@@ -28,7 +28,7 @@ class MG_Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 						$pet->user_id = $this->user->id;
 						$pet->abandoned = time();
 						$pet->save();
-						Hint::success('You have adopted ' . $pet->name . '.');
+						Hint::success('You have adopted '.$pet->name.'.');
 						$this->redirect(Route::get('pets')->uri());
 					}
 					else

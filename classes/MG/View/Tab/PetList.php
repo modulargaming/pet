@@ -36,7 +36,8 @@ class MG_View_Tab_PetList extends Abstract_View_Tab {
 		return $pets;
 	}
 
-	public function user() {
+	public function user()
+	{
 		return array(
 			'username' => $this->user->username
 		);

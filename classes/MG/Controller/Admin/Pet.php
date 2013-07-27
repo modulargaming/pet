@@ -6,7 +6,7 @@ class MG_Controller_Admin_Pet extends Abstract_Controller_Admin {
 	{
 		$id = $this->request->param('id');
 
-		if ( ! $this->user->can('Admin_Pet_Index') )
+		if ( ! $this->user->can('Admin_Pet_Index'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin pets index');
 		}
@@ -17,7 +17,7 @@ class MG_Controller_Admin_Pet extends Abstract_Controller_Admin {
 
 	public function action_search()
 	{
-		if ( ! $this->user->can('Admin_Pet_Search') )
+		if ( ! $this->user->can('Admin_Pet_Search'))
 		{
 			throw HTTP_Exception::factory('403', 'Permission denied to view admin pets search');
 		}
@@ -28,13 +28,13 @@ class MG_Controller_Admin_Pet extends Abstract_Controller_Admin {
 		$type = $this->request->query('type');
 		$item_name = $this->request->query('name');
 
-		if($type == 'pet-specie')
+		if ($type == 'pet-specie')
 		{
 			$items = ORM::factory('Pet_Specie')
 			->where('pet_specie.name', 'LIKE', '%'.$item_name.'%')
 			->find_all();
 		}
-		else if($type == 'pet-colour')
+		elseif ($type == 'pet-colour')
 		{
 			$items = ORM::factory('Pet_Colour')
 			->where('pet_colour.name', 'LIKE', '%'.$item_name.'%')

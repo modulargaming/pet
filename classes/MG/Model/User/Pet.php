@@ -83,6 +83,6 @@ class MG_Model_User_Pet extends ORM {
 
 	public function img()
 	{
-		return URL::base() . 'media/image/pets/'.$this->specie->dir.'/'.$this->colour->image;
+		return URL::base().'media/image/pets/'.$this->specie->dir.'/'.$this->colour->image;
 	}
 }

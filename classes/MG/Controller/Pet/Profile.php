@@ -14,9 +14,10 @@ class MG_Controller_Pet_Profile extends Abstract_Controller_Frontend {
 	public function action_index()
 	{
 		$pet = ORM::factory('User_Pet')
-		->where('name', '=', $this->request->param('name'))
-		->find();
-		if (!$pet->loaded())
+			->where('name', '=', $this->request->param('name'))
+			->find();
+
+		if ( ! $pet->loaded())
 		{
 			throw HTTP_Exception::factory('404', 'Pet not found');
 		}

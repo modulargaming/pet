@@ -26,7 +26,7 @@ class MG_Controller_Pet_Index extends Abstract_Controller_Frontend {
 					->find();
 					$pet->active = time();
 					$pet->save();
-					Hint::success($pet->name . ' is now your active pet.');
+					Hint::success($pet->name.' is now your active pet.');
 				}
 				if ($this->request->post('abandon'))
 				{
@@ -37,7 +37,7 @@ class MG_Controller_Pet_Index extends Abstract_Controller_Frontend {
 					$pet->user_id = NULL;
 					$pet->abandoned = time();
 					$pet->save();
-					Hint::success('You have abandoned ' . $pet->name . '.');
+					Hint::success('You have abandoned '.$pet->name.'.');
 				}
 				$this->redirect(Route::get('pets')->uri());
 			}

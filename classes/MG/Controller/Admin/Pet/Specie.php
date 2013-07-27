@@ -5,7 +5,7 @@
 		public function action_index()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Index'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Index'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie index');
 			}
@@ -23,9 +23,10 @@
 			$this->view->image_dim = Kohana::$config->load('pet.image');
 		}
 
-		public function action_paginate() {
+		public function action_paginate()
+		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Paginate'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Paginate'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie paginate');
 			}
@@ -51,13 +52,15 @@
 				$datatables->render($this->response);
 			}
 			else
-				throw new HTTP_Exception_500();
+			{
+				throw HTTP_Exception::factory(500, 'Internal server error');
+			}
 		}
 
 		public function action_retrieve()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Retrieve'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Retrieve'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie retrieve');
 			}
@@ -90,7 +93,7 @@
 		public function action_save()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Save'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Save'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie save');
 			}
@@ -127,7 +130,7 @@
 
 				foreach ($list as $field => $er)
 				{
-					if (!is_array($er))
+					if ( ! is_array($er))
 					{
 						$er = array($er);
 					}
@@ -142,7 +145,7 @@
 		public function action_delete()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Delete'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Delete'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie delete');
 			}
@@ -160,7 +163,7 @@
 		public function action_colour_load()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Colour_Load'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Colour_Load'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie colour load');
 			}
@@ -182,7 +185,7 @@
 		public function action_colour_delete()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Colour_Delete'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Colour_Delete'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie colour delete');
 			}
@@ -202,7 +205,7 @@
 		public function action_colour_update()
 		{
 
-			if (!$this->user->can('Admin_Pet_Specie_Colour_Update'))
+			if ( ! $this->user->can('Admin_Pet_Specie_Colour_Update'))
 			{
 				throw HTTP_Exception::factory('403', 'Permission denied to view admin pets specie colour update');
 			}
@@ -212,7 +215,7 @@
 			$colour = $this->request->post('colour_id');
 			$c = ORM::factory('Pet_Colour', $colour);
 
-			//handle upload
+			// handle upload
 			$file = array('status' => 'empty', 'msg' => '');
 
 			if (isset($_FILES['image']))
@@ -220,14 +223,14 @@
 				$image = $_FILES['image'];
 				$cfg = Kohana::$config->load('pet.image');
 
-				if (!Upload::valid($image))
+				if ( ! Upload::valid($image))
 				{
-					//error not valid upload
+					// error not valid upload
 					$file = array('status' => 'error', 'msg' => 'You did not provide a valid file to upload.');
 				}
-				else if (!Upload::image($image, $cfg['width'], $cfg['height'], TRUE))
+				elseif ( ! Upload::image($image, $cfg['width'], $cfg['height'], TRUE))
 				{
-					//not the right image dimensions
+					// not the right image dimensions
 					$file = array('status' => 'error', 'msg' => 'You need to provide a valid image (size: :width x :heigth.', array(
 						':width' => $cfg['width'], ':height' => $cfg['height']
 					));
@@ -235,25 +238,25 @@
 				else
 				{
 					$msg = '';
-					if (file_exists(DOCROOT . 'media/image/pets/' . $specie->dir . $c->image))
+					if (file_exists(DOCROOT.'media/image/pets/'.$specie->dir.$c->image))
 					{
-						//move the previously stored item to the graveyard
-						$new_name = Text::random('alnum', 4) . $specie->name;
-						copy(DOCROOT . 'media/image/pets/' . $specie->dir . $c->image, DOCROOT . 'assets/graveyard/pets/' . $new_name);
-						unlink(DOCROOT . 'media/image/pets/' . $specie->dir . $c->image);
-						$msg = 'The old image has been moved to the graveyard and renamed to ' . $new_name;
+						// move the previously stored item to the graveyard
+						$new_name = Text::random('alnum', 4).$specie->name;
+						copy(DOCROOT.'media/image/pets/'.$specie->dir.$c->image, DOCROOT.'assets/graveyard/pets/'.$new_name);
+						unlink(DOCROOT.'media/image/pets/'.$specie->dir.$c->image);
+						$msg = 'The old image has been moved to the graveyard and renamed to '.$new_name;
 					}
 
-					$up = Upload::save($image, $c->image, DOCROOT . 'media/image/pets/' . $specie->dir);
+					$up = Upload::save($image, $c->image, DOCROOT.'media/image/pets/'.$specie->dir);
 
 					if ($up != FALSE)
 					{
 						$file['status'] = 'success';
 						$file['msg'] = 'You\'ve successfully uploaded your pet image';
 
-						if (!empty($msg))
+						if ( ! empty($msg))
 						{
-							$file['msg'] .= '<br />' . $msg;
+							$file['msg'] .= '<br />'.$msg;
 						}
 					}
 					else
@@ -263,7 +266,7 @@
 				}
 			}
 
-			//save colour
+			// save colour
 			$specie->add('colours', $c);
 
 			$this->response->headers('Content-Type', 'application/json');
