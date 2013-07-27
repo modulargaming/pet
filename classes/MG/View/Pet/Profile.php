@@ -48,7 +48,7 @@ class MG_View_Pet_Profile extends Abstract_View {
 		elseif ($this->pet->user_id)
 		{
 			$array[] = array(
-				'title' => $this->pet->user->username . "'" . ($this->pet->user->username[strlen($this->pet->user->username)-1] == 's' ? '' : 's') . ' pets',
+				'title' => $this->pet->user->username."'".(($this->pet->user->username[strlen($this->pet->user->username)-1] == 's') ? '' : 's').' pets',
 				'href'  => '#'
 			);
 		}
