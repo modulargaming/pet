@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * View for Admin Pet Specie
+ *
+ * @package    MG/Pet
+ * @category   View
+ * @author     Modular Gaming
+ * @copyright  (c) 2013 Modular Gaming
+ * @license    BSD http://www.modulargaming.com/license
+ */
 class MG_View_Admin_Pet_Specie_Index extends Abstract_View_Admin {
 
 	public $title = 'Pet species';

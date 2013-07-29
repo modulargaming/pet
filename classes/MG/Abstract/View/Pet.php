@@ -1,12 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Abstract base view for forum.
+ * Abstract base view for pet
  *
- * @package    MG Forum
+ * @package    MG/Pet
  * @category   View
- * @author     Modular Gaming Team
- * @copyright  (c) 2013 Modular Gaming Team
- * @license    BSD http://modulargaming.com/license
+ * @author     Modular Gaming
+ * @copyright  (c) 2013 Modular Gaming
+ * @license    BSD http://www.modulargaming.com/license
  */
 class MG_Abstract_View_Pet extends Abstract_View {
 

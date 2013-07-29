@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
-
+/**
+ * Controller for Admin Pet
+ *
+ * @package    MG/Pet
+ * @category   Controller
+ * @author     Modular Gaming
+ * @copyright  (c) 2013 Modular Gaming
+ * @license    BSD http://www.modulargaming.com/license
+ */
 class MG_Controller_Admin_Pet extends Abstract_Controller_Admin {
 
 	public function action_index()
