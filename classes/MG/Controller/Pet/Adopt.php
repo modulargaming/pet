@@ -23,7 +23,7 @@ class MG_Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 					{
 						$pet = ORM::factory('User_Pet')
 						->where('user_pet.id', '=', $this->request->post('adopt'))
-						->where('user_id', '=', 0)
+						->where('user_id', '=', NULL)
 						->find();
 						$pet->user_id = $this->user->id;
 						$pet->abandoned = time();
@@ -45,7 +45,7 @@ class MG_Controller_Pet_Adopt extends Abstract_Controller_Frontend {
 
 		$this->view = new View_Pet_Adopt;
 		$pets = ORM::factory('User_Pet')
-		->where('user_id', '=', 0)
+		->where('user_id', '=', NULL)
 		->order_by('abandoned', 'desc');
 
 		$paginate = Paginate::factory($pets)
