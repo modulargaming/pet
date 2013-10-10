@@ -226,10 +226,19 @@
 			// handle upload
 			$file = array('status' => 'empty', 'msg' => '');
 
+
 			if (isset($_FILES['image']))
 			{
 				$image = $_FILES['image'];
 				$cfg = Kohana::$config->load('pet.image');
+
+				// check if the temp dir exists
+				if ( ! file_exists($cfg['tmp_dir']))
+				{
+				mkdir($cfg['tmp_dir']);
+				}
+
+
 
 				if ( ! Upload::valid($image))
 				{
@@ -245,6 +254,12 @@
 				}
 				else
 				{
+
+				if ( ! file_exists(DOCROOT.'media/image/pets/'.$specie->dir))
+				{
+					mkdir(DOCROOT.'media/image/pets/'.$specie->dir);
+				}
+
 					$msg = '';
 					if (file_exists(DOCROOT.'media/image/pets/'.$specie->dir.$c->image))
 					{
