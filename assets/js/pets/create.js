@@ -4,6 +4,17 @@ function pet_image() {
     $('#pet_image').attr('src', base_url + pet_data.species[selected.specie].dir + '/' + pet_data.colours[selected.colour].img);
 }
 
+function pet_update_button_status() {
+	$.each(pet_data.colours, function (colour, data) {
+		if (pet_data.species[selected.specie].colours.indexOf(parseInt(colour)) < 0) {
+			$('button.pet_colour[value="' + colour + '"]').prop('disabled', true);
+		}
+		else {
+			$('button.pet_colour[value="' + colour + '"]').prop('disabled', false);
+		}
+	});
+}
+
 $(document).ready(function () {
 
 	// Only run on pet create.
@@ -11,19 +22,14 @@ $(document).ready(function () {
 		return;
 	}
 
+	pet_update_button_status();
+
     $("a[rel=popover]").click(function (e) {
         e.preventDefault();
 
         selected.specie = $(this).data('specie');
 
-        $.each(pet_data.colours, function (colour, data) {
-            if (pet_data.species[selected.specie].colours.indexOf(parseInt(colour)) < 0) {
-                $('button.pet_colour[value="' + colour + '"]').addClass('disabled');
-            }
-            else {
-                $('button.pet_colour[value="' + colour + '"]').removeClass('disabled');
-            }
-        });
+	    pet_update_button_status();
 
         $('#specie_id').val(selected.specie);
         pet_image();
